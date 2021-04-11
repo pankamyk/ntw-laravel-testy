@@ -9,7 +9,7 @@
  
             <div class="card-body">
                @if (auth()->user()->is_admin == 1)
-                  <a href="{{ url('admin/home')}} ">Admin</a>
+                  <a href="{{ url(route('users.index')) }} ">Users</a>
                @else
                   <div class=”panel-heading”>Normal User</div>
                @endif

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group([
-   'namespace' => 'Admin', 
    'prefix' => 'admin', 
    'middleware' => 'is_admin'
 ], function() {
 
-   Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+   Route::resource('/users', UserController::class);
+
+   Route::get('/home', [HomeController::class, 'admin'])->name('admin.home');
 
 });
