@@ -11,6 +11,7 @@
                   <div class="center">
                      <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">New user</a>
                   </div>
+
                   <table class="table">
 
                      <thead>
@@ -18,7 +19,7 @@
                            <td>ID</td>
                            <td>Name</td>
                            <td>Email</td>
-                           <td>Admin?</td>
+                           <td>Status</td>
                            <td>Actions</td>
                         </tr>
                      </thead>
@@ -29,10 +30,11 @@
                               <td>{{ $user->id }}</td>
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->email }}</td>
-                              <td>{{ $user->is_admin }}</td>
+                              <td>{{ $user->is_admin ? "admin" : "" }}</td>
                               <td class="text-center">
-                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                 <form action="{{ route('users.destroy', $user->id )}}" method="post" style="display: inline-block">
+                                 <a href="{{ route('users.show', [$user]) }}" class="btn btn-info btn-sm">Show</a>
+                                 <a href="{{ route('users.edit', [$user]) }}" class="btn btn-success btn-sm">Edit</a>
+                                 <form action="{{ route('users.destroy', [$user] )}}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
