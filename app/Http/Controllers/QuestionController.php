@@ -47,19 +47,16 @@ class QuestionController extends Controller
     */
    public function store(Request $request)
    {
-      Question::create([
+      $question = Question::create([
          'description' => $request->input('description'),
          'answer_1' => $request->input('answer_1'),
          'answer_2' => $request->input('answer_2'),
          'answer_3' => $request->input('answer_3'),
          'answer_4' => $request->input('answer_4'),
-         'correct_answer' => 
-            $request->input(
-               $request->input('correct_answer')
-            )
+         'correct_answer' => $request->input('correct_answer')
       ]);
 
-      return redirect()->route('questions.index');
+      return redirect()->route('questions.show', [$question]);
    }
 
    /**
@@ -70,7 +67,7 @@ class QuestionController extends Controller
     */
    public function show(Question $question)
    {
-      dd($question);
+      return view('question.show', compact('question'));
    }
 
    /**
@@ -81,7 +78,7 @@ class QuestionController extends Controller
     */
    public function edit(Question $question)
    {
-      //
+      return view('question.edit', compact('question'));
    }
 
    /**
@@ -93,7 +90,16 @@ class QuestionController extends Controller
     */
    public function update(Request $request, Question $question)
    {
-      //
+      $question->description = $request->input('description');
+      $question->answer_1 = $request->input('answer_1');
+      $question->answer_2 = $request->input('answer_2');
+      $question->answer_3 = $request->input('answer_3');
+      $question->answer_4 = $request->input('answer_4');
+      $question->correct_answer = $request->input('correct_answer');
+
+      $question->save();
+
+      return redirect()->route('questions.show', [$question]);
    }
 
    /**
@@ -104,6 +110,8 @@ class QuestionController extends Controller
     */
    public function destroy(Question $question)
    {
-      //
+      $question->delete();
+
+      return redirect()->route('questions.index');
    }
 }
