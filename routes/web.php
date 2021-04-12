@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::group(
    , function() {
 
    Route::resource('/users',     UserController::class);
+   Route::resource('/groups',    GroupController::class);
    Route::resource('/tests',     TestController::class);
    Route::resource('/questions', QuestionController::class);
 
