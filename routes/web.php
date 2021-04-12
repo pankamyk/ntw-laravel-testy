@@ -21,15 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home',       [HomeController::class, 'index'])->name('home');
+Route::get('/admin/home', [HomeController::class, 'admin'])
+   ->name('admin.home')
+   ->middleware('is_admin');
 
-Route::group([
-   'prefix' => 'admin', 
-   'middleware' => 'is_admin'
-], function() {
+Route::group(
+   ['prefix' => 'admin', 'middleware' => 'is_admin']
+   , function() {
 
    Route::resource('/users', UserController::class);
 
-   Route::get('/home', [HomeController::class, 'admin'])->name('admin.home');
 
 });

@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
    /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+   public function __construct()
+   {
+      $this->middleware('auth');
+   }
+
+   /**
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response
@@ -38,7 +48,7 @@ class UserController extends Controller
     */
    public function store(Request $request)
    {
-      $validated = $this->validateRequest($request);
+      $validated = $this->validateUserParams($request);
 
       User::create([
          'name' => $validated['name'],
@@ -80,7 +90,7 @@ class UserController extends Controller
     */
    public function update(Request $request, User $user)
    {
-      $validated = $this->validateRequest($request);
+      $validated = $this->validateUserParams($request);
 
       $user->name = $validated['name'];
       $user->email = $validated['email'];
@@ -104,7 +114,7 @@ class UserController extends Controller
       return redirect()->route('users.index');
    }
 
-   private function validateRequest(Request $request)
+   private function validateUserParams(Request $request)
    {
       return $request->validate([
          'name' => ['required', 'string', 'max:255'],
