@@ -24,8 +24,8 @@
                         @foreach($tests as $test)
                            <tr>
                               <td>{{ $test->id }}</td>
-                              <td>{{ $test->description }}</td>
-                              <td class="text-center">
+                              <td>{{ $test->name }}</td>
+                              <td class="text-left">
                                  <a href="{{ route('tests.show', [$test]) }}" class="btn btn-info btn-sm">Show</a>
                                  <a href="{{ route('tests.edit', [$test]) }}" class="btn btn-success btn-sm">Edit</a>
                                  <form action="{{ route('tests.destroy', [$test] )}}" method="post" style="display: inline-block">

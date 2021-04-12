@@ -29,7 +29,7 @@
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->email }}</td>
                               <td>{{ $user->is_admin ? "admin" : "" }}</td>
-                              <td class="text-center">
+                              <td class="text-left">
                                  <a href="{{ route('users.show', [$user]) }}" class="btn btn-info btn-sm">Show</a>
                                  <a href="{{ route('users.edit', [$user]) }}" class="btn btn-success btn-sm">Edit</a>
                                  <form action="{{ route('users.destroy', [$user] )}}" method="post" style="display: inline-block">

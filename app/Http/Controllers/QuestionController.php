@@ -110,6 +110,7 @@ class QuestionController extends Controller
     */
    public function destroy(Question $question)
    {
+      $question->tests()->detach();
       $question->delete();
 
       return redirect()->route('questions.index');

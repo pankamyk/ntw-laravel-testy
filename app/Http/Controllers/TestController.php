@@ -50,7 +50,11 @@ class TestController extends Controller
     */
    public function store(Request $request)
    {
-      dd($request->all());
+      $test = Test::create(['name' => $request->input('name')]);
+
+      $test->questions()->syncWithoutDetaching($request->questions);
+
+      return redirect()->route('tests.show', [$test]);
    }
 
    /**
@@ -61,7 +65,7 @@ class TestController extends Controller
     */
    public function show(Test $test)
    {
-      //
+      return view('test.show', compact('test'));
    }
 
    /**
@@ -95,6 +99,9 @@ class TestController extends Controller
     */
    public function destroy(Test $test)
    {
-      //
+      $test->questions()->detach();
+      $test->delete();
+
+      return redirect()->route('tests.index');
    }
 }

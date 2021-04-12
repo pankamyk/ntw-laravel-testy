@@ -25,7 +25,7 @@
                            <tr>
                               <td>{{ $question->id }}</td>
                               <td>{{ $question->description }}</td>
-                              <td class="text-center">
+                              <td class="text-left">
                                  <a href="{{ route('questions.show', [$question]) }}" class="btn btn-info btn-sm">Show</a>
                                  <a href="{{ route('questions.edit', [$question]) }}" class="btn btn-success btn-sm">Edit</a>
                                  <form action="{{ route('questions.destroy', [$question] )}}" method="post" style="display: inline-block">
