@@ -76,7 +76,13 @@ class TestController extends Controller
     */
    public function edit(Test $test)
    {
-      //
+      $test->load('questions');
+      $questions = Question::all(); //with('tests')->get();
+
+      return view('test.edit', [
+         'test' => $test, 
+         'questions' => $questions
+      ]);
    }
 
    /**
@@ -88,7 +94,11 @@ class TestController extends Controller
     */
    public function update(Request $request, Test $test)
    {
-      //
+      $test->name = $request->input('name');
+
+      $test->questions()->sync($request->questions);
+
+      return redirect()->route('tests.show', [$test]);
    }
 
    /**

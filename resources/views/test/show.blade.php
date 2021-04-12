@@ -17,7 +17,7 @@
                         <li class="list-group-item d-flex justify-content-between">
                            <p>{{ $question->description }}</p>
                            <div class="text-right">
-                              <a href="{{ route('questions.show', [$question]) }}" class="btn btn-info btn-sm">Edit</a>
+                              <a href="{{ route('questions.show', [$question]) }}" class="btn btn-info btn-sm">Show</a>
                               <a href="{{ route('questions.edit', [$question]) }}" class="btn btn-success btn-sm">Edit</a>
                               <form action="{{ route('questions.destroy', [$question] )}}" method="post" style="display: inline-block">
                                  @csrf
