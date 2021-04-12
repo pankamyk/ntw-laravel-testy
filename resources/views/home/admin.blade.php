@@ -9,8 +9,17 @@
  
             <div class="card-body">
                @if (auth()->user()->is_admin == 1)
-                  <a href="{{ url(route('users.index')) }} ">Users</a>
-                  <a href="{{ url(route('questions.index')) }} ">Questions</a>
+                  <ul class="list-group">
+                     <li class="list-group-item">
+                        <a href="{{ url(route('users.index')) }} ">Users</a>
+                     </li>
+                     <li class="list-group-item">
+                        <a href="{{ url(route('questions.index')) }} ">Questions</a>
+                     </li>
+                     <li class="list-group-item">
+                        <a href="{{ url(route('tests.index')) }} ">Tests</a>
+                     </li>
+                  </ul>
                @else
                   <div class=”panel-heading”>Normal User</div>
                @endif
