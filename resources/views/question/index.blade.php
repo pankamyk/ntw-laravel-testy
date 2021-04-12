@@ -5,34 +5,30 @@
       <div class="row justify-content-center">
          <div class="col-md-8">
             <div class="card">
-               <div class="card-header">Users</div>
+               <div class="card-header">Questions</div>
 
                <div class="card-body">
-                  <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">New user</a>
+                  <a href="{{ route('questions.create') }}" class="btn btn-primary mb-2">New question</a>
 
                   <table class="table">
 
                      <thead>
                         <tr class="table-primary">
                            <td>ID</td>
-                           <td>Name</td>
-                           <td>Email</td>
-                           <td>Status</td>
+                           <td>Description</td>
                            <td>Actions</td>
                         </tr>
                      </thead>
 
                      <tbody>
-                        @foreach($users as $user)
+                        @foreach($questions as $question)
                            <tr>
-                              <td>{{ $user->id }}</td>
-                              <td>{{ $user->name }}</td>
-                              <td>{{ $user->email }}</td>
-                              <td>{{ $user->is_admin ? "admin" : "" }}</td>
+                              <td>{{ $question->id }}</td>
+                              <td>{{ $question->description }}</td>
                               <td class="text-center">
-                                 <a href="{{ route('users.show', [$user]) }}" class="btn btn-info btn-sm">Show</a>
-                                 <a href="{{ route('users.edit', [$user]) }}" class="btn btn-success btn-sm">Edit</a>
-                                 <form action="{{ route('users.destroy', [$user] )}}" method="post" style="display: inline-block">
+                                 <a href="{{ route('questions.show', [$question]) }}" class="btn btn-info btn-sm">Show</a>
+                                 <a href="{{ route('questions.edit', [$question]) }}" class="btn btn-success btn-sm">Edit</a>
+                                 <form action="{{ route('questions.destroy', [$question] )}}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
