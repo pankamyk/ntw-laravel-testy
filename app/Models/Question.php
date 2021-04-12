@@ -22,4 +22,9 @@ class Question extends Model
       'answer_4',
       'correct_answer'
    ];
+
+   public function tests()
+   {
+      return $this->belongsToMany(Test::class);
+   }
 }

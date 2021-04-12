@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,9 @@ class TestController extends Controller
     */
    public function index()
    {
-      //
+      $tests = Test::all();
+
+      return view('test.index', compact('tests'));
    }
 
    /**
@@ -34,7 +37,9 @@ class TestController extends Controller
     */
    public function create()
    {
-      //
+      $questions = Question::all();
+      
+      return view('test.new', compact('questions'));
    }
 
    /**
@@ -45,7 +50,7 @@ class TestController extends Controller
     */
    public function store(Request $request)
    {
-      //
+      dd($request->all());
    }
 
    /**
