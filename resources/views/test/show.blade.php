@@ -30,6 +30,25 @@
                   </ul>
 
                   <hr>
+                  
+                  <ul class="list-group">
+                     @foreach($test->groups as $group)
+                        <li class="list-group-item d-flex justify-content-between">
+                           <p>{{ $group->name }}</p>
+                           <div class="text-right">
+                              <a href="{{ route('groups.show', [$group]) }}" class="btn btn-info btn-sm">Show</a>
+                              <a href="{{ route('groups.edit', [$group]) }}" class="btn btn-success btn-sm">Edit</a>
+                              <form action="{{ route('groups.destroy', [$group] )}}" method="post" style="display: inline-block">
+                                 @csrf
+                                 @method('DELETE')
+                                 <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                              </form>
+                           </div>
+                        </li>
+                     @endforeach
+                  </ul>
+
+                  <hr>
 
                   <a href="{{ route('tests.edit', [$test]) }}" class="btn btn-success btn-sm">Edit</a>
                   <form action="{{ route('tests.destroy', [$test] )}}" method="post" style="display: inline-block">

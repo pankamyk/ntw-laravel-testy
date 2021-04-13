@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\User;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -108,6 +109,7 @@ class GroupController extends Controller
    public function destroy(Group $group)
    {
       $group->users()->detach();
+      $group->tests()->detach();
       $group->delete();
 
       return redirect()->route('groups.index');

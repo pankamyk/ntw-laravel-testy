@@ -110,6 +110,7 @@ class UserController extends Controller
    public function destroy(User $user)
    {
       $user->groups()->detach();
+      $user->tests()->detach();
       $user->delete();
 
       return redirect()->route('users.index');

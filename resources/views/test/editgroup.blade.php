@@ -5,10 +5,10 @@
       <div class="row justify-content-center">
          <div class="col-md-8">
             <div class="card">
-               <div class="card-header">Edit test questions</div>
+               <div class="card-header">Edit test classes</div>
 
                <div class="card-body">
-                  <form method="POST" action="{{ route('tests.update', [$test]) }}">
+                  <form method="POST" action="{{ route('tests.updateGroup', [$test]) }}">
                      @csrf
                      @method('PATCH')
 
@@ -28,14 +28,14 @@
 
                      <hr>
 
-                     @foreach ($questions as $question)
+                     @foreach ($groups as $group)
                         <div class="form-group row">
                            <div class="col-md-2">
-                              <input class="form-control" id="{{ $question->id }}" name="questions[]" type="checkbox" value="{{ $question->id }}" {{ $test->questions->contains($question->id) ? 'checked' : '' }}>
+                              <input class="form-control" id="{{ $group->id }}" name="groups[]" type="checkbox" value="{{ $group->id }}" {{ $test->groups->contains($group->id) ? 'checked' : '' }}>
                            </div>
 
-                           <label for="{{ $question->id }}" class="col-md-8 col-form-label text-md-left">
-                              {{ $question->description }}
+                           <label for="{{ $group->id }}" class="col-md-8 col-form-label text-md-left">
+                              {{ $group->name }}
                            </label>
                         </div>
                      @endforeach
@@ -45,7 +45,7 @@
                      <div class="form-group row mb-0">
                         <div class="col-md-5 offset-md-5">
                            <button type="submit" class="btn btn-primary">
-                              {{ __('Update test') }}
+                              {{ __('Update classe\'s') }}
                            </button>
                         </div>
                      </div>

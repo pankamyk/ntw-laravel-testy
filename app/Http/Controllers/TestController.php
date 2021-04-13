@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Test;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -85,6 +86,23 @@ class TestController extends Controller
    }
 
    /**
+    * Show the form for editing the specified resource's subresource (group).
+    *
+    * @param  \App\Models\Test  $test
+    * @return \Illuminate\Http\Response
+    */
+   public function editGroups(Test $test)
+   {
+      $test->load('groups');
+      $groups = Group::all(); //with('tests')->get();
+
+      return view('test.editgroup', [
+         'test' => $test, 
+         'groups' => $groups
+      ]);
+   }
+
+   /**
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
@@ -100,6 +118,21 @@ class TestController extends Controller
    }
 
    /**
+    * Update the specified resource's subresource (group) in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\Models\Test  $test
+    * @return \Illuminate\Http\Response
+    */
+   public function updateGroups(Request $request, Test $test)
+   {
+      $test->name = $request->input('name');
+      $test->groups()->sync($request->groups);
+
+      return redirect()->route('tests.show', [$test]);
+   }
+
+   /**
     * Remove the specified resource from storage.
     *
     * @param  \App\Models\Test  $test
@@ -108,6 +141,8 @@ class TestController extends Controller
    public function destroy(Test $test)
    {
       $test->questions()->detach();
+      $test->users()->detach();
+      $test->groups()->detach();
       $test->delete();
 
       return redirect()->route('tests.index');

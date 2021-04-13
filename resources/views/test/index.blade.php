@@ -31,6 +31,7 @@
                               <td class="text-left">
                                  <a href="{{ route('tests.show', [$test]) }}" class="btn btn-info btn-sm">Show</a>
                                  <a href="{{ route('tests.edit', [$test]) }}" class="btn btn-success btn-sm">Edit</a>
+                                 <a href="{{ route('tests.editGroup', [$test]) }}" class="btn btn-success btn-sm">Edit classes</a>
                                  <form action="{{ route('tests.destroy', [$test] )}}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
