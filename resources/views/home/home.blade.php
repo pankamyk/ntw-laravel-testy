@@ -18,7 +18,7 @@
                   <a href="{{url('admin/home')}}">Admin</a>
                @else
                   <div class=”panel-heading”>
-                     Normal User
+                     <a href="{{ url(route('users.tests')) }} ">Your tests</a>
                   </div>
                @endif
 

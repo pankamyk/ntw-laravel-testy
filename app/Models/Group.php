@@ -23,8 +23,8 @@ class Group extends Model
       return $this->belongsToMany(User::class);
    }
 
-   public function groups()
+   public function tests()
    {
-      return $this->belongsToMany(Group::class);
+      return $this->belongsToMany(Test::class);
    }
 }

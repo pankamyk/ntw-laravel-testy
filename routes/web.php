@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserTestController;
 use App\Http\Controllers\GroupController;
 
 /*
@@ -27,6 +28,10 @@ Auth::routes();
 Route::get('/home',       [HomeController::class, 'index'])->name('home');
 Route::get('/admin/home', [HomeController::class, 'admin'])->name('admin.home')->middleware('is_admin');
 
+Route::get('/home/tests',        [UserTestController::class, 'index'])->name('users.tests');
+Route::get('/home/{test}/solve', [UserTestController::class, 'create'])->name('users.tests.new');
+Route::post('/home/{test}',       [UserTestController::class, 'store'])->name('users.tests.store');
+
 Route::group(
    ['prefix' => 'admin', 'middleware' => 'is_admin']
    , function() {
@@ -39,7 +44,7 @@ Route::group(
    Route::get('/tests/{test}/groups',   [TestController::class, 'editGroups'])->name('tests.editGroup');
    Route::patch('/tests/{test}/groups', [TestController::class, 'updateGroups'])->name('tests.updateGroup');
 
-   Route::get('/users/{user}/tests',    [UserController::class, 'editTests'])->name('users.editTest');
-   Route::patch('/users/{user}/users',  [UserController::class, 'updateTests'])->name('users.updateTest');
+   Route::get('/users/{user}/tests/edit',     [UserController::class, 'editTests'])->name('users.editTest');
+   Route::patch('/users/{user}/tests/delete', [UserController::class, 'updateTests'])->name('users.updateTest');
 
 });
