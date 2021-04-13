@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Test;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -67,7 +69,7 @@ class UserController extends Controller
     */
    public function show(User $user)
    {
-      dd($user);
+      return view('user.show', compact('user'));
    }
 
    /**
@@ -79,6 +81,23 @@ class UserController extends Controller
    public function edit(User $user)
    {
       return view('user.edit', compact('user'));
+   }
+
+   /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Models\User  $user
+    * @return \Illuminate\Http\Response
+    */
+   public function editTests(User $user)
+   {
+      $user->load('tests');
+      $tests = Test::all(); 
+
+      return view('user.edittest', [
+         'tests' => $tests, 
+         'user' => $user
+      ]);
    }
 
    /**
@@ -99,6 +118,20 @@ class UserController extends Controller
       $user->save();
 
       return redirect()->route('users.index');
+   }
+   
+   /**
+    * Update the specified resource's subresource (test) in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\Models\User  $user
+    * @return \Illuminate\Http\Response
+    */
+   public function updateTests(Request $request, User $user)
+   {
+      $user->tests()->sync($request->tests);
+
+      return redirect()->route('users.show', [$user]);
    }
 
    /**

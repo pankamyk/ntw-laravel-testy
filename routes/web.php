@@ -36,7 +36,10 @@ Route::group(
    Route::resource('/tests',     TestController::class);
    Route::resource('/questions', QuestionController::class);
 
-   Route::get('/tests/{test}/groups',   [TestController::class, 'editGroups'])  ->name('tests.editGroup');
+   Route::get('/tests/{test}/groups',   [TestController::class, 'editGroups'])->name('tests.editGroup');
    Route::patch('/tests/{test}/groups', [TestController::class, 'updateGroups'])->name('tests.updateGroup');
+
+   Route::get('/users/{user}/tests',    [UserController::class, 'editTests'])->name('users.editTest');
+   Route::patch('/users/{user}/users',  [UserController::class, 'updateTests'])->name('users.updateTest');
 
 });

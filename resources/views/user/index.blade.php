@@ -35,11 +35,14 @@
                               <td class="text-left">
                                  <a href="{{ route('users.show', [$user]) }}" class="btn btn-info btn-sm">Show</a>
                                  <a href="{{ route('users.edit', [$user]) }}" class="btn btn-success btn-sm">Edit</a>
-                                 <form action="{{ route('users.destroy', [$user] )}}" method="post" style="display: inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                 </form>
+                                 @unless($user->is_admin)
+                                    <a href="{{ route('users.editTest', [$user]) }}" class="btn btn-success btn-sm">Edit tests</a>
+                                    <form action="{{ route('users.destroy', [$user] )}}" method="post" style="display: inline-block">
+                                       @csrf
+                                       @method('DELETE')
+                                       <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                    </form>
+                                 @endunless
                               </td>
                            </tr>
                         @endforeach
