@@ -51,7 +51,6 @@ class GroupController extends Controller
    public function store(Request $request)
    {
       $group = Group::create(['name' => $request->input('name')]);
-
       $group->users()->syncWithoutDetaching($request->users);
 
       return redirect()->route('groups.show', [$group]);
@@ -65,7 +64,7 @@ class GroupController extends Controller
     */
    public function show(Group $group)
    {
-      //
+      return view('group.show', compact('group'));
    }
 
    /**
@@ -76,7 +75,13 @@ class GroupController extends Controller
     */
    public function edit(Group $group)
    {
-      //
+      $group->load('users');
+      $users = User::where('is_admin', false)->get();
+
+      return view('group.edit',[
+         'group' => $group,
+         'users' => $users
+      ]);
    }
 
    /**
@@ -88,7 +93,10 @@ class GroupController extends Controller
     */
    public function update(Request $request, Group $group)
    {
-      //
+      $group->name = $request->input('name');
+      $group->users()->sync($request->users);
+
+      return redirect()->route('groups.show', [$group]);
    }
 
    /**
@@ -99,6 +107,9 @@ class GroupController extends Controller
     */
    public function destroy(Group $group)
    {
-      //
+      $group->users()->detach();
+      $group->delete();
+
+      return redirect()->route('groups.index');
    }
 }

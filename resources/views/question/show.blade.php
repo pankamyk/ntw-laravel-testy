@@ -8,23 +8,39 @@
                <div class="card-header">Question</div>
 
                <div class="card-body">
-                  <h4 class="card-title my-2">{{ $question->description }}</h4>
+                  <h5 class="card-title my-2">{{ $question->description }}</h5>
 
                   <hr>
 
-                  <h5 class="card-title my-3">
-                     {!! $question->correct_answer == 'answer_1' ? '<b><u>A</u></b>' : 'A' !!} : {{ $question->answer_1 }}
-                  </h5>
-                  <h5 class="card-title my-3">
-                     {!! $question->correct_answer == 'answer_2' ? '<b><u>B</u></b>' : 'B' !!} : {{ $question->answer_2 }}
-                  </h5>
-                  <h5 class="card-title my-3">
-                     {!! $question->correct_answer == 'answer_3' ? '<b><u>C</u></b>' : 'C' !!} : {{ $question->answer_3 }}
-                  </h5>
-                  <h5 class="card-title my-3">
-                     {!! $question->correct_answer == 'answer_4' ? '<b><u>D</u></b>' : 'D' !!} : {{ $question->answer_4 }}
-                  </h5>
-                  
+                  <table class="table table-bordered">
+                     <tbody>
+                        <tr {!! $question->correct_answer == 'answer_1' ? 'class="table-success"' : '' !!}>
+                           <th scope="row">A</th>
+                           <td>
+                              {{ $question->answer_1 }}
+                           </td>
+                        </tr>
+                        <tr {!! $question->correct_answer == 'answer_2' ? 'class="table-success"' : '' !!}>
+                           <th scope="row">B</th>
+                           <td>
+                              {{ $question->answer_2 }}
+                           </td>
+                        </tr>
+                        <tr {!! $question->correct_answer == 'answer_3' ? 'class="table-success"' : '' !!}>
+                           <th scope="row">C</th>
+                           <td>
+                              {{ $question->answer_3 }}
+                           </td>
+                        </tr>
+                        <tr {!! $question->correct_answer == 'answer_4' ? 'class="table-success"' : '' !!}>
+                           <th scope="row">D</th>
+                           <td>
+                              {{ $question->answer_4 }}
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+
                   <hr>
 
                   <a href="{{ route('questions.edit', [$question]) }}" class="btn btn-success btn-sm">Edit</a>

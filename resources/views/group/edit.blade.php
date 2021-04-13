@@ -5,10 +5,10 @@
       <div class="row justify-content-center">
          <div class="col-md-8">
             <div class="card">
-               <div class="card-header">New test</div>
+               <div class="card-header">Edit group</div>
 
                <div class="card-body">
-                  <form method="POST" action="{{ route('tests.update', [$test]) }}">
+                  <form method="POST" action="{{ route('groups.update', [$group]) }}">
                      @csrf
                      @method('PATCH')
 
@@ -16,7 +16,7 @@
                         <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('name') }}</label>
 
                         <div class="col-md-8">
-                           <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $test->name }}" required autocomplete="name" autofocus>
+                           <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $group->name }}" required autocomplete="name" autofocus>
 
                            @error('name')
                            <span class="invalid-feedback" role="alert">
@@ -28,14 +28,14 @@
 
                      <hr>
 
-                     @foreach ($questions as $question)
+                     @foreach ($users as $user)
                         <div class="form-group row">
                            <div class="col-md-2">
-                              <input class="form-control" id="{{ $question->id }}" name="questions[]" type="checkbox" value="{{ $question->id }}" {{ $test->questions->contains($question->id) ? 'checked' : '' }}>
+                              <input class="form-control" id="{{ $user->id }}" name="users[]" type="checkbox" value="{{ $user->id }}" {{ $group->users->contains($user->id) ? 'checked' : '' }}>
                            </div>
 
-                           <label for="{{ $question->id }}" class="col-md-8 col-form-label text-md-left">
-                              {{ $question->description }}
+                           <label for="{{ $user->id }}" class="col-md-8 col-form-label text-md-left">
+                              {{ $user->email }}
                            </label>
                         </div>
                      @endforeach

@@ -8,7 +8,10 @@
                <div class="card-header">Users</div>
 
                <div class="card-body">
-                  <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">New user</a>
+                  <div class="d-flex justify-content-between">
+                     <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">New user</a>
+                     <a href="{{ route('admin.home') }}" class="btn btn-primary mb-2">Go to home</a>
+                  </div>
 
                   <table class="table">
 

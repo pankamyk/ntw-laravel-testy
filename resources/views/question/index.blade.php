@@ -8,7 +8,10 @@
                <div class="card-header">Questions</div>
 
                <div class="card-body">
-                  <a href="{{ route('questions.create') }}" class="btn btn-primary mb-2">New question</a>
+                  <div class="d-flex justify-content-between">
+                     <a href="{{ route('questions.create') }}" class="btn btn-primary mb-2">New question</a>
+                     <a href="{{ route('admin.home') }}" class="btn btn-primary mb-2">Go to home</a>
+                  </div>
 
                   <table class="table">
 

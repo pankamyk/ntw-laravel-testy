@@ -51,7 +51,6 @@ class TestController extends Controller
    public function store(Request $request)
    {
       $test = Test::create(['name' => $request->input('name')]);
-
       $test->questions()->syncWithoutDetaching($request->questions);
 
       return redirect()->route('tests.show', [$test]);
@@ -95,7 +94,6 @@ class TestController extends Controller
    public function update(Request $request, Test $test)
    {
       $test->name = $request->input('name');
-
       $test->questions()->sync($request->questions);
 
       return redirect()->route('tests.show', [$test]);

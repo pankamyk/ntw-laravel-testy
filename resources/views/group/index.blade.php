@@ -5,10 +5,13 @@
       <div class="row justify-content-center">
          <div class="col-md-8">
             <div class="card">
-               <div class="card-header">groups</div>
+               <div class="card-header">Groups</div>
 
                <div class="card-body">
-                  <a href="{{ route('groups.create') }}" class="btn btn-primary mb-2">New group</a>
+                  <div class="d-flex justify-content-between">
+                     <a href="{{ route('groups.create') }}" class="btn btn-primary mb-2">New group</a>
+                     <a href="{{ route('admin.home') }}" class="btn btn-primary mb-2">Go to home</a>
+                  </div>
 
                   <table class="table">
 
