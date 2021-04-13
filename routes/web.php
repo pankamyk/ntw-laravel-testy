@@ -25,16 +25,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home',       [HomeController::class, 'index'])->name('home');
-Route::get('/admin/home', [HomeController::class, 'admin'])->name('admin.home')->middleware('is_admin');
 
+Route::get('/home',       [HomeController::class, 'index'])->name('home');
 Route::get('/home/tests',        [UserTestController::class, 'index'])->name('users.tests');
 Route::get('/home/{test}/solve', [UserTestController::class, 'create'])->name('users.tests.new');
 Route::post('/home/{test}',       [UserTestController::class, 'store'])->name('users.tests.store');
 
+
 Route::group(
    ['prefix' => 'admin', 'middleware' => 'is_admin']
    , function() {
+
+   Route::get('/admin/home', [HomeController::class, 'admin'])->name('admin.home');
 
    Route::resource('/users',     UserController::class);
    Route::resource('/groups',    GroupController::class);

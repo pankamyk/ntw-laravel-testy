@@ -8,6 +8,7 @@ use App\Models\Test;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class UserTestController extends Controller
 {
@@ -36,6 +37,17 @@ class UserTestController extends Controller
       {
          $tests = $tests->merge($group->tests);
       }
+
+      $answeredTests = [];
+
+      foreach($user->answers as $answer)
+      {
+         $answeredTests[] = $answer->test;
+      }
+
+      $answeredTests = collect($answeredTests);
+
+      $tests = $tests->diff($answeredTests);
       
       return view('usertest.index', [
          'tests' => $tests,
@@ -58,12 +70,33 @@ class UserTestController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function store(User $user, Request $request)
+   public function store(Test $test, Request $request)
    {
-      dd($request->all());
-      $test = Test::create(['name' => $request->input('name')]);
-      $test->questions()->syncWithoutDetaching($request->questions);
+      $answer = new Answer;
 
-      return redirect()->route('tests.show', [$test]);
+      $answer->test()->associate($test);
+      $answer->user()->associate(auth()->user());
+      
+      $score = 0;
+      $max = 0;
+
+      foreach($test->questions as $question) 
+      {
+         $userAnswer = $request->input((string)$question->id);
+
+         if ($userAnswer == $question->correct_answer) 
+         {
+            $score++;
+         }
+
+         $max++;
+      }
+
+      $answer->score = $score;
+      $answer->max = $max;
+
+      $answer->save();
+
+      return redirect()->route('users.tests');
    }
 }
