@@ -22,4 +22,9 @@ class Test extends Model
    {
       return $this->belongsToMany(Question::class);
    }
+
+   public function users()
+   {
+      return $this->belongsToMany(User::class);
+   }
 }
