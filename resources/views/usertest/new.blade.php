@@ -28,8 +28,8 @@
                         @endphp
                         <div class="form-group">
                            <ul class="list-group col-md-13">
-                              <li class="list-group-item">
-                                 <h5 class="card-title">{{ $question->description }}</h5>
+                              <li class="list-group-item list-group-item-info">
+                                 {{ $question->description }}
                               </li>
 
                               @foreach ($answers as $answer)

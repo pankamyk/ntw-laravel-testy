@@ -26,10 +26,11 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/home',       [HomeController::class, 'index'])->name('home');
+Route::get('/home',              [HomeController::class, 'index'])->name('home');
 Route::get('/home/tests',        [UserTestController::class, 'index'])->name('users.tests');
 Route::get('/home/{test}/solve', [UserTestController::class, 'create'])->name('users.tests.new');
-Route::post('/home/{test}',       [UserTestController::class, 'store'])->name('users.tests.store');
+Route::post('/home/{test}',      [UserTestController::class, 'store'])->name('users.tests.store');
+Route::get('/home/{test}/show',  [UserTestController::class, 'show'])->name('users.tests.show');
 
 
 Route::group(

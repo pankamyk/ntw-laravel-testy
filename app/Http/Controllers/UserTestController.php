@@ -57,6 +57,7 @@ class UserTestController extends Controller
    /**
     * Show the form for creating a new resource.
     *
+    * @param \app\Models\Test $test
     * @return \Illuminate\Http\Response
     */
    public function create(Test $test)
@@ -67,6 +68,7 @@ class UserTestController extends Controller
    /**
     * Store a newly created resource in storage.
     *
+    * @param \app\Models\Test $test
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
@@ -97,6 +99,21 @@ class UserTestController extends Controller
 
       $answer->save();
 
-      return redirect()->route('users.tests');
+      return redirect()->action([UserTestController::class, 'show'], [$test, $request]);
+   }
+
+   /**
+    * Show a resource.
+    *
+    * @param \app\Models\Test $test
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function show(Test $test, Request $request)
+   {
+      return view('usertest.answer', [
+         'test' => $test,
+         'request' => $request
+      ]);
    }
 }
