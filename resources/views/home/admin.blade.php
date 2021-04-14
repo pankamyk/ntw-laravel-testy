@@ -22,6 +22,9 @@
                      <li class="list-group-item">
                         <a href="{{ url(route('groups.index')) }} ">Classes</a>
                      </li>
+                     <li class="list-group-item">
+                        <a href="{{ url(route('answers.index')) }} ">Answers</a>
+                     </li>
                   </ul>
                @else
                   <div class=”panel-heading”>Normal User</div>

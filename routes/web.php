@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuestionController;
@@ -37,12 +38,13 @@ Route::group(
    ['prefix' => 'admin', 'middleware' => 'is_admin']
    , function() {
 
-   Route::get('/admin/home', [HomeController::class, 'admin'])->name('admin.home');
+   Route::get('/home', [HomeController::class, 'admin'])->name('admin.home');
 
    Route::resource('/users',     UserController::class);
    Route::resource('/groups',    GroupController::class);
    Route::resource('/tests',     TestController::class);
    Route::resource('/questions', QuestionController::class);
+   Route::resource('/answers',   AnswerController::class)->only(['index', 'show', 'delete']);
 
    Route::get('/tests/{test}/groups',   [TestController::class, 'editGroups'])->name('tests.editGroup');
    Route::patch('/tests/{test}/groups', [TestController::class, 'updateGroups'])->name('tests.updateGroup');
