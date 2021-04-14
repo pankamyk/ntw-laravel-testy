@@ -9,7 +9,15 @@
 
                <div class="card-body">
 
-                  <h3 class="card-title">{{ $test->name }}</h3>
+                  <h3 class="card-title">
+                     {{ $test->name }}
+                  </h3>
+                  <hr>
+                  <h3 class="card-title">
+                     @if (session('points')) 
+                        {{ session('points') }}%
+                     @endif
+                  </h3>
 
                   <hr>
 

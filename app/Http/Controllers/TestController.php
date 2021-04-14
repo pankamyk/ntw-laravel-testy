@@ -143,6 +143,8 @@ class TestController extends Controller
       $test->questions()->detach();
       $test->users()->detach();
       $test->groups()->detach();
+      $test->answers()->detach();
+
       $test->delete();
 
       return redirect()->route('tests.index');

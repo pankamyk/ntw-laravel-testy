@@ -97,9 +97,11 @@ class UserTestController extends Controller
       $answer->score = $score;
       $answer->max = $max;
 
+      $points = round($answer->score/$answer->max, 2);  
+
       $answer->save();
 
-      return redirect()->action([UserTestController::class, 'show'], [$test, $request]);
+      return redirect()->action([UserTestController::class, 'show'], [$test, $request])->with('points', $points);
    }
 
    /**
